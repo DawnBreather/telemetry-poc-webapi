@@ -1,0 +1,42 @@
+2023/11/19 07:40:02.057 [I] [app.go:214]  http server Running on http://:8080
+2023/11/19 07:40:24.313 [I] [app.go:214]  http server Running on http://:8080
+2023/11/19 07:47:05.742 [I] [app.go:214]  http server Running on http://:8080
+2023/11/19 07:55:21.602 [I] [app.go:214]  http server Running on http://:8080
+2023/11/19 08:03:36.380 [I] [app.go:214]  http server Running on http://:8080
+2023/11/19 08:05:39.547 [I] [app.go:214]  http server Running on http://:8080
+2023/11/19 08:05:39.548 [C] [app.go:231]  ListenAndServe:  listen tcp :8080: bind: address already in use
+2023/11/19 08:06:00.819 [I] [app.go:214]  http server Running on http://:8080
+2023/11/25 20:10:39.028  [I] [server.go:280]  http server Running on http://:8080
+2023/11/25 20:23:03.836  [E] [usercontroller.go:37]  Error unmarshaling request data:  unexpected end of JSON input
+2023/11/25 20:23:24.584  [E] [usercontroller.go:37]  Error unmarshaling request data:  unexpected end of JSON input
+2023/11/25 20:30:00.130  [E] [usercontroller.go:37]  Error unmarshaling request data:  unexpected end of JSON input
+2023/11/25 20:32:39.091  [E] [usercontroller.go:37]  Error unmarshaling request data:  unexpected end of JSON input
+2023/11/25 20:32:53.258  [I] [server.go:280]  http server Running on http://:8080
+2023/11/25 20:33:10.655  [I] [server.go:280]  http server Running on http://:8080
+2023/11/25 20:33:28.237  [I] [server.go:280]  http server Running on http://:8080
+2023/11/25 20:34:18.762  [I] [server.go:280]  http server Running on http://:8080
+2023/11/25 20:35:32.355  [I] [server.go:280]  http server Running on http://:8080
+2023/11/25 20:35:45.579  [E] [usercontroller.go:37]  Error unmarshaling request data : unexpected end of JSON input
+2023/11/25 20:35:49.451  [E] [usercontroller.go:37]  Error unmarshaling request data : unexpected end of JSON input
+2023/11/25 20:35:59.908  [I] [server.go:280]  http server Running on http://:8080
+2023/11/25 20:36:15.127  [I] [server.go:280]  http server Running on http://:8080
+2023/11/25 20:36:20.044  [E] [usercontroller.go:37]  Error unmarshaling request data : unexpected end of JSON input
+2023/11/25 20:37:53.579  [I] [server.go:280]  http server Running on http://:8080
+2023/11/25 20:37:56.060  [E] [usercontroller.go:39]  Error unmarshaling request data : unexpected end of JSON input
+2023/11/25 20:38:26.289  [I] [server.go:280]  http server Running on http://:8080
+2023/11/25 20:38:28.912  [E] [usercontroller.go:39]  Error unmarshaling request data : unexpected end of JSON input
+2023/11/25 20:40:10.986  [I] [server.go:280]  http server Running on http://:8080
+2023/11/25 20:40:16.003  [E] [usercontroller.go:39]  Error unmarshaling request data : unexpected end of JSON input
+2023/11/25 20:46:25.138  [I] [server.go:280]  http server Running on http://:8080
+2023/11/25 20:46:28.450  [I] [usercontroller.go:64]  User created successfully:  1
+2023/11/25 20:46:28.450  [D] [router.go:1305]  |      127.0.0.1|[97;42m 200 [0m|  87.595625ms|   match|[97;46m POST    [0m /user/create   r:/user/create
+2023/11/25 20:50:21.126  [I] [usercontroller.go:64]  User created successfully:  2
+2023/11/25 20:50:21.127  [D] [router.go:1305]  |      127.0.0.1|[97;42m 200 [0m| 114.248125ms|   match|[97;46m POST    [0m /user/create   r:/user/create
+2023/11/25 21:10:35.943  [I] [server.go:280]  http server Running on http://:8080
+2023/11/25 21:11:01.785  [D] [router.go:1305]  |            ::1|[97;42m 200 [0m|    730.042µs|   match|[97;44m GET     [0m /swagger/
+2023/11/25 21:11:01.821  [D] [router.go:1305]  |            ::1|[97;42m 200 [0m|   1.152541ms|   match|[97;44m GET     [0m /swagger/swagger-ui.css
+2023/11/25 21:11:01.823  [D] [router.go:1305]  |            ::1|[97;42m 200 [0m|   3.805459ms|   match|[97;44m GET     [0m /swagger/swagger-ui-bundle.js
+2023/11/25 21:11:01.825  [D] [router.go:1305]  |            ::1|[97;42m 200 [0m|   3.597459ms|   match|[97;44m GET     [0m /swagger/swagger-ui-standalone-preset.js
+2023/11/25 21:11:02.280  [D] [router.go:1305]  |            ::1|[97;42m 200 [0m|    648.792µs|   match|[97;44m GET     [0m /swagger/swagger.json
+2023/11/25 21:11:25.149  [I] [usercontroller.go:64]  User created successfully:  3
+2023/11/25 21:11:25.150  [D] [router.go:1305]  |            ::1|[97;42m 200 [0m|  108.51525ms|   match|[97;46m POST    [0m /user/create   r:/user/create

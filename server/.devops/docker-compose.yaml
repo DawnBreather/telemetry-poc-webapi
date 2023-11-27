@@ -1,0 +1,55 @@
+# https://github.com/open-telemetry/opentelemetry-go-instrumentation#instrument-an-application-in-docker-compose
+# This docker-compose needs to be run under Linux
+
+version: '3'
+
+services:
+  webapi_srv:
+    build:
+      context: ../
+      dockerfile: .devops/dockerfile
+    environment:
+      DB_POSTGRES_USERNAME: "postgres"
+      DB_POSTGRES_PASSWORD: "postgres"
+      DB_POSTGRES_HOST_AND_PORT: "postgres:5432"
+      DB_POSTGRES_DBNAME: "db"
+    ports:
+      - "8080:8080"
+#    volumes:
+#      - .:/usr/bin/webapi_srv_workdir
+    depends_on:
+      - postgres
+
+  postgres:
+    image: postgres
+    environment:
+      POSTGRES_PASSWORD: "postgres"
+    volumes:
+      - postgres-data:/var/lib/postgresql/data
+
+  go-auto:
+    image: otel/autoinstrumentation-go
+    privileged: true
+    pid: "host"
+    environment:
+      - OTEL_EXPORTER_OTLP_ENDPOINT=http://otel-collector:4318
+      - OTEL_GO_AUTO_TARGET_EXE=/usr/bin/webapi_srv_workdir/webapi_srv
+      - OTEL_SERVICE_NAME=webapi_srv
+      - OTEL_PROPAGATORS=tracecontext,baggage
+    volumes:
+#      - .:/usr/bin/webapi_srv_workdir
+      - /proc:/host/proc
+    depends_on:
+      - webapi_srv
+      - otel-collector
+
+  otel-collector:
+    image: otel/opentelemetry-collector
+    command: ["--config=/etc/otel-collector-config.yaml"]
+    volumes:
+      - ./otel-collector-config.yaml:/etc/otel-collector-config.yaml
+    ports:
+      - "4318:4318" # OpenTelemetry collector port
+
+volumes:
+  postgres-data:

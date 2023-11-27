@@ -1,0 +1,457 @@
+{
+    "swagger": "2.0",
+    "info": {
+        "title": "Server API",
+        "version": "1.0.0",
+        "description": "API documentation for Server"
+    },
+    "host": "localhost:8080",
+    "basePath": "/",
+    "schemes": ["http"],
+    "paths": {
+        "/user/login": {
+            "post": {
+                "summary": "Authenticate a user and return a token",
+                "description": "Authenticate a user by their credentials and return a JWT token upon successful authentication.",
+                "parameters": [
+                    {
+                        "in": "body",
+                        "name": "body",
+                        "description": "User credentials for login",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/LoginCredentials"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful login",
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "token": {
+                                    "type": "string",
+                                    "example": "YOUR_TOKEN"
+                                }
+                            }
+                        }
+                    },
+                    "400": { "description": "Bad request or invalid request data" },
+                    "401": { "description": "Unauthorized or invalid credentials" },
+                    "500": { "description": "Internal Server Error or error generating token" }
+                }
+            }
+        },
+        "/user/create": {
+            "post": {
+                "summary": "Create a new user",
+                "description": "Create a new user in the system",
+                "parameters": [
+                    {
+                        "in": "body",
+                        "name": "body",
+                        "description": "User object that needs to be added to the system",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/User"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "User created successfully",
+                        "schema": { "$ref": "#/definitions/StandardResponse" }
+                    },
+                    "400": { "description": "Bad request" },
+                    "500": { "description": "Internal Server Error" }
+                }
+            }
+        },
+        "/user/update/{userID}": {
+            "put": {
+                "summary": "Update an existing user's information",
+                "description": "Updates the details of an existing user identified by their user ID.",
+                "parameters": [
+                    {
+                        "name": "userID",
+                        "in": "path",
+                        "required": true,
+                        "type": "integer",
+                        "description": "Unique identifier of the user"
+                    },
+                    {
+                        "in": "body",
+                        "name": "body",
+                        "description": "User object with updated information",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/User"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "User updated successfully",
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "result": {
+                                    "type": "string",
+                                    "example": "success"
+                                }
+                            }
+                        }
+                    },
+                    "400": { "description": "Bad request or invalid user ID" },
+                    "404": { "description": "User not found" },
+                    "500": { "description": "Internal Server Error" }
+                }
+            }
+        },
+        "/user/delete/{userID}": {
+            "delete": {
+                "summary": "Remove a user from the system",
+                "description": "Deletes a user from the system based on the provided user ID.",
+                "parameters": [
+                    {
+                        "name": "userID",
+                        "in": "path",
+                        "required": true,
+                        "type": "integer",
+                        "description": "Unique identifier of the user to be deleted"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "User deleted successfully",
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "result": {
+                                    "type": "string",
+                                    "example": "success"
+                                }
+                            }
+                        }
+                    },
+                    "400": { "description": "Bad request or invalid user ID" },
+                    "404": { "description": "User not found" },
+                    "500": { "description": "Internal Server Error or error deleting user" }
+                }
+            }
+        },
+        "/user/{userID}": {
+            "get": {
+                "summary": "Retrieve detailed information for a specific user",
+                "description": "Fetches detailed information of a user identified by their user ID.",
+                "parameters": [
+                    {
+                        "name": "userID",
+                        "in": "path",
+                        "required": true,
+                        "type": "integer",
+                        "description": "Unique identifier of the user"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Detailed user information",
+                        "schema": { "$ref": "#/definitions/User" }
+                    },
+                    "400": { "description": "Bad request or invalid user ID" },
+                    "404": { "description": "User not found" },
+                    "500": { "description": "Internal Server Error or error retrieving user details" }
+                }
+            }
+        },
+        "/user/list": {
+            "get": {
+                "summary": "List all users in the system",
+                "description": "Retrieve a list of all users currently in the system.",
+                "responses": {
+                    "200": {
+                        "description": "An array of users",
+                        "schema": {
+                            "type": "array",
+                            "items": { "$ref": "#/definitions/User" }
+                        }
+                    },
+                    "500": {
+                        "description": "Internal Server Error",
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "error": {
+                                    "type": "string",
+                                    "example": "Error retrieving users"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/car/create": {
+            "post": {
+                "summary": "Add a new car to the system",
+                "description": "Creates a new car record in the system.",
+                "parameters": [
+                    {
+                        "in": "body",
+                        "name": "body",
+                        "description": "Car object that needs to be added to the system",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/Car"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Car created successfully",
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "result": {
+                                    "type": "string",
+                                    "example": "success"
+                                }
+                            }
+                        }
+                    },
+                    "400": { "description": "Bad request or error parsing request data" },
+                    "401": { "description": "Unauthorized attempt to create car" },
+                    "500": { "description": "Internal Server Error or error creating car" }
+                }
+            }
+        },
+        "/car/update/{carID}": {
+            "put": {
+                "summary": "Update an existing car entry",
+                "description": "Updates the details of an existing car identified by its car ID.",
+                "parameters": [
+                    {
+                        "name": "carID",
+                        "in": "path",
+                        "required": true,
+                        "type": "integer",
+                        "description": "Unique identifier of the car"
+                    },
+                    {
+                        "in": "body",
+                        "name": "body",
+                        "description": "Car object with updated information",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/Car"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Car updated successfully",
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "result": {
+                                    "type": "string",
+                                    "example": "success"
+                                }
+                            }
+                        }
+                    },
+                    "400": { "description": "Bad request or invalid car ID" },
+                    "401": { "description": "Unauthorized attempt to update car" },
+                    "404": { "description": "Car not found" },
+                    "500": { "description": "Internal Server Error or error updating car" }
+                }
+            }
+        },
+        "/car/delete/{carID}": {
+            "delete": {
+                "summary": "Remove a car from the system",
+                "description": "Deletes a car record from the system based on the car ID.",
+                "parameters": [
+                    {
+                        "name": "carID",
+                        "in": "path",
+                        "required": true,
+                        "type": "integer",
+                        "description": "Unique identifier of the car to be deleted"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Car deleted successfully",
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "result": {
+                                    "type": "string",
+                                    "example": "success"
+                                }
+                            }
+                        }
+                    },
+                    "400": { "description": "Bad request or invalid car ID" },
+                    "401": { "description": "Unauthorized attempt to delete car" },
+                    "404": { "description": "Car not found" },
+                    "500": { "description": "Internal Server Error or error deleting car" }
+                }
+            }
+        },
+        "/car/{carID}": {
+            "get": {
+                "summary": "Retrieve details of a specific car",
+                "description": "Fetches details of a car specified by its unique ID.",
+                "parameters": [
+                    {
+                        "name": "carID",
+                        "in": "path",
+                        "required": true,
+                        "type": "integer",
+                        "description": "Unique identifier of the car"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Car details",
+                        "schema": { "$ref": "#/definitions/Car" }
+                    },
+                    "400": { "description": "Bad request or invalid car ID" },
+                    "401": { "description": "Unauthorized attempt to access car details" },
+                    "404": { "description": "Car not found" },
+                    "500": { "description": "Internal Server Error or error retrieving car from database" }
+                }
+            }
+        },
+        "/car/list": {
+            "get": {
+                "summary": "List all cars in the system",
+                "description": "Retrieves a list of all cars available in the system.",
+                "responses": {
+                    "200": {
+                        "description": "An array of cars",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/Car"
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized attempt to list cars",
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "error": {
+                                    "type": "string",
+                                    "example": "Unauthorized"
+                                }
+                            }
+                        }
+                    },
+                    "500": {
+                        "description": "Internal Server Error or error retrieving cars",
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "error": {
+                                    "type": "string",
+                                    "example": "Error retrieving cars"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/misc/health": {
+            "get": {
+                "summary": "Check if the API is running and reachable",
+                "responses": {
+                    "200": { "description": "API is healthy", "schema": { "$ref": "#/definitions/HealthResponse" }}
+                }
+            }
+        },
+        "/misc/version": {
+            "get": {
+                "summary": "Provide the current version of the API",
+                "responses": {
+                    "200": { "description": "API version information", "schema": { "$ref": "#/definitions/VersionResponse" }}
+                }
+            }
+        }
+    },
+    "definitions": {
+        "StandardResponse": {
+            "type": "object",
+            "properties": {
+                "result": { "type": "string" }
+            }
+        },
+        "User": {
+            "type": "object",
+            "properties": {
+                "Id": { "type": "integer", "format": "int64" },
+                "Username": { "type": "string" },
+                "Password": { "type": "string" },
+                "Email": { "type": "string" }
+            }
+        },
+        "Car": {
+            "type": "object",
+            "required": [
+                "Make",
+                "Model",
+                "Year",
+                "Color"
+            ],
+            "properties": {
+                "Id": {
+                    "type": "integer",
+                    "format": "int64"
+                },
+                "Make": {
+                    "type": "string"
+                },
+                "Model": {
+                    "type": "string"
+                },
+                "Year": {
+                    "type": "integer"
+                },
+                "Color": {
+                    "type": "string"
+                }
+            }
+        },
+        "HealthResponse": {
+            "type": "object",
+            "properties": {
+                "status": { "type": "string" }
+            }
+        },
+        "VersionResponse": {
+            "type": "object",
+            "properties": {
+                "version": { "type": "string" }
+            }
+        },
+        "LoginResponse": {
+            "type": "object",
+            "properties": {
+                "token": { "type": "string" }
+            }
+        },
+        "LoginCredentials": {
+            "type": "object",
+            "required": ["Username", "Password"],
+            "properties": {
+                "Username": { "type": "string" },
+                "Password": { "type": "string" }
+            }
+        }
+    }
+}
